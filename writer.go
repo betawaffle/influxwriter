@@ -1,4 +1,4 @@
-package influx
+package influxwriter
 
 import (
 	"bytes"

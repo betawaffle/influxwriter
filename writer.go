@@ -49,13 +49,15 @@ func NewWriter(uri, db, user, pass string, insecure bool) (*Writer, error) {
 		}
 	}
 
-	return &Writer{
+	w := &Writer{
 		http:    c,
 		baseURL: u,
 		dbName:  db,
 		user:    user,
 		pass:    pass,
-	}, nil
+	}
+	go w.flusher()
+	return w, nil
 }
 
 func (w *Writer) Write(p []byte) (n int, err error) {
